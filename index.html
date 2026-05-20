@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Digital Bridge Eye Clinic – Oshodi, Lagos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #5A1F9C;
+    --purple-mid: #7B3BBE;
+    --purple-light: #A96EE8;
+    --teal: #00BCD4;
+    --teal-dark: #0097A7;
+    --white: #FFFFFF;
+    --off-white: #F5F0FF;
+    --dark: #0E0520;
+    --text: #2D1B4E;
+    --muted: #6B5E82;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6%;
+    background: rgba(10, 3, 30, 0.72);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: background .3s;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo .logo-circle {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--purple-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: white; font-weight: 700;
+  }
+  .nav-logo span {
+    color: white; font-weight: 600; font-size: .95rem; letter-spacing: .03em;
+    line-height: 1.2;
+  }
+  .nav-logo span em { color: var(--teal); font-style: normal; display: block; font-size: .75rem; font-weight: 300; letter-spacing: .1em; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,.78); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta {
+    background: var(--teal); color: white; border: none;
+    padding: 10px 22px; border-radius: 50px; font-size: .88rem;
+    font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background .2s, transform .2s;
+  }
+  .nav-cta:hover { background: var(--teal-dark); transform: scale(1.04); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; width: 100%; height: 100vh;
+    overflow: hidden; display: flex; align-items: center;
+  }
+  .hero-video {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    filter: brightness(0.35) saturate(1.3);
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(20,4,60,.7) 0%, rgba(0,0,0,.2) 60%, rgba(0,188,212,.08) 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 720px; padding: 0 6%;
+    animation: fadeUp .9s ease both;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,188,212,.15); border: 1px solid rgba(0,188,212,.4);
+    color: var(--teal); padding: 6px 16px; border-radius: 50px;
+    font-size: .78rem; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; margin-bottom: 24px;
+  }
+  .hero-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: pulse 1.5s infinite; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    line-height: 1.12; color: white;
+    font-weight: 900; margin-bottom: 24px;
+  }
+  .hero h1 .accent { color: var(--teal); font-style: italic; }
+  .hero p {
+    color: rgba(255,255,255,.8); font-size: 1.08rem; line-height: 1.7;
+    max-width: 540px; margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--purple-mid); color: white;
+    padding: 15px 32px; border-radius: 50px; border: none;
+    font-size: .95rem; font-weight: 600; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .2s, transform .15s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--purple); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: white;
+    padding: 15px 32px; border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,.4);
+    font-size: .95rem; font-weight: 500; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color .2s, background .2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--teal); background: rgba(0,188,212,.1); }
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 6%; z-index: 2;
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,.45); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .hero-scroll .line { width: 40px; height: 1px; background: rgba(255,255,255,.3); }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--purple);
+    padding: 28px 6%;
+    display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;
+  }
+  .stat { text-align: center; color: white; }
+  .stat .num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--teal); }
+  .stat .label { font-size: .8rem; font-weight: 400; opacity: .75; margin-top: 2px; letter-spacing: .05em; }
+
+  /* ─── SECTIONS SHARED ─── */
+  section { padding: 88px 6%; }
+  .section-tag {
+    display: inline-block; color: var(--purple-mid);
+    font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 900; color: var(--text); line-height: 1.2;
+    margin-bottom: 18px;
+  }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 540px; }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--off-white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; margin-top: 48px;
+  }
+  .service-card {
+    background: white; border-radius: 20px;
+    padding: 32px 28px;
+    border: 1px solid rgba(90,31,156,.08);
+    transition: transform .25s, box-shadow .25s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--teal));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(90,31,156,.12); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px; font-size: 1.4rem;
+  }
+  .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+  .service-card p { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+  /* ─── GALLERY ─── */
+  #gallery { background: var(--dark); }
+  #gallery .section-title { color: white; }
+  #gallery .section-sub { color: rgba(255,255,255,.5); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 280px 280px;
+    gap: 16px; margin-top: 48px;
+  }
+  .gallery-item {
+    border-radius: 16px; overflow: hidden; position: relative;
+    cursor: pointer;
+  }
+  .gallery-item:first-child { grid-row: 1 / 3; }
+  .gallery-item img, .gallery-item video {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .5s; display: block;
+  }
+  .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.05); }
+  .gallery-item .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(90,31,156,.7) 0%, transparent 60%);
+    opacity: 0; transition: opacity .3s;
+    display: flex; align-items: flex-end; padding: 20px;
+  }
+  .gallery-item:hover .overlay { opacity: 1; }
+  .gallery-item .overlay span { color: white; font-size: .85rem; font-weight: 600; }
+
+  /* ─── WHY US ─── */
+  #why {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    padding: 88px 6%;
+  }
+  .why-visual {
+    position: relative;
+  }
+  .why-visual img {
+    width: 100%; height: 480px; object-fit: cover;
+    border-radius: 24px; display: block;
+  }
+  .why-badge {
+    position: absolute; bottom: -24px; right: -20px;
+    background: var(--purple); color: white;
+    padding: 20px 24px; border-radius: 18px;
+    box-shadow: 0 16px 40px rgba(90,31,156,.35);
+    text-align: center;
+  }
+  .why-badge .num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--teal); }
+  .why-badge .label { font-size: .75rem; opacity: .85; }
+  .why-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+  .why-list li {
+    display: flex; align-items: flex-start; gap: 16px;
+    font-size: .95rem; color: var(--muted); line-height: 1.6;
+  }
+  .why-list li .check {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--purple), var(--teal));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: .8rem; margin-top: 2px;
+  }
+
+  /* ─── HOURS ─── */
+  #hours { background: var(--off-white); text-align: center; }
+  .hours-cards {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 48px;
+  }
+  .hours-card {
+    background: white; border-radius: 20px; padding: 36px 40px;
+    border: 1px solid rgba(90,31,156,.1);
+    min-width: 220px;
+    box-shadow: 0 4px 24px rgba(90,31,156,.06);
+    transition: transform .25s;
+  }
+  .hours-card:hover { transform: translateY(-4px); }
+  .hours-card .day { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--purple-mid); font-weight: 700; margin-bottom: 12px; }
+  .hours-card .time { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text); }
+  .hours-card .note { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--dark);
+    padding: 88px 6%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
+  }
+  #contact .section-title { color: white; }
+  #contact .section-sub { color: rgba(255,255,255,.5); }
+  .contact-info { margin-top: 40px; display: flex; flex-direction: column; gap: 22px; }
+  .contact-info-item {
+    display: flex; align-items: flex-start; gap: 18px;
+  }
+  .contact-info-item .icon-box {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: rgba(90,31,156,.35);
+    border: 1px solid rgba(161,110,232,.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-info-item .text label { font-size: .72rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .1em; display: block; margin-bottom: 4px; }
+  .contact-info-item .text span { color: white; font-size: .95rem; font-weight: 500; }
+  .contact-form { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 36px; }
+  .contact-form h3 { color: white; font-size: 1.15rem; font-weight: 600; margin-bottom: 24px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: .8rem; color: rgba(255,255,255,.5); margin-bottom: 8px; letter-spacing: .04em; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1); border-radius: 10px;
+    padding: 13px 16px; color: white; font-size: .9rem;
+    font-family: 'DM Sans', sans-serif; outline: none;
+    transition: border-color .2s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.25); }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal); }
+  .form-group select option { background: #1a0a35; }
+  .form-group textarea { height: 110px; resize: none; }
+  .form-submit {
+    width: 100%; padding: 15px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--purple-mid), var(--teal-dark));
+    color: white; font-size: .95rem; font-weight: 600;
+    border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: opacity .2s, transform .15s;
+  }
+  .form-submit:hover { opacity: .88; transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #050010; color: rgba(255,255,255,.35);
+    padding: 30px 6%; text-align: center;
+    font-size: .82rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;
+  }
+  footer a { color: var(--teal); text-decoration: none; }
+  .social-links { display: flex; gap: 16px; }
+  .social-links a {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: .8rem; text-decoration: none;
+    transition: background .2s;
+  }
+  .social-links a:hover { background: var(--purple-mid); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(1.4); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    #why { grid-template-columns: 1fr; }
+    .why-visual img { height: 320px; }
+    .why-badge { right: 10px; bottom: -16px; }
+    #contact { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: auto; }
+  }
+  @media (max-width: 560px) {
+    section { padding: 60px 5%; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .stats-bar { gap: 28px; }
+    #contact { padding: 60px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-circle">DB</div>
+    <span>Digital Bridge<em>Eye Clinic</em></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="VID-20260519-WA0096.mp4" type="video/mp4">
+    <source src="VID-20260519-WA0097.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Trusted Eye Care · Oshodi, Lagos
+    </div>
+    <h1>Stop Missing People<br>& <span class="accent">Opportunities</span> —<br>Check Your Eyes Today</h1>
+    <p>Your vision is your most valuable sense. At Digital Bridge Eye Clinic, we combine clinical excellence with compassionate care so you never miss a moment that matters.</p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="num">5,000+</div><div class="label">Patients Treated</div></div>
+  <div class="stat"><div class="num">6+</div><div class="label">Expert Optometrists</div></div>
+  <div class="stat"><div class="num">100%</div><div class="label">Modern Equipment</div></div>
+  <div class="stat"><div class="num">1,000+</div><div class="label">Frames & Styles</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag">What We Offer</div>
+  <h2 class="section-title">Comprehensive Eye Care,<br>All Under One Roof</h2>
+  <p class="section-sub">From routine checks to specialist-level procedures — Digital Bridge Eye Clinic has every service your eyes will ever need.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">👁️</div>
+      <h3>Comprehensive Eye Examination</h3>
+      <p>Detailed visual assessments and medical eye exams to detect conditions early and prescribe the most accurate treatment.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🕶️</div>
+      <h3>Optical Frames & Accessories</h3>
+      <p>Hundreds of quality frames and accessories to suit every face shape, style and budget — all in-store.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <h3>Designer Frames & Sunglasses</h3>
+      <p>Premium designer collections and stylish sunglasses that protect your eyes while keeping you fashion-forward.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔵</div>
+      <h3>Contact Lenses</h3>
+      <p>Daily, monthly, and specialty lenses fitted by trained optometrists for comfort and optimal visual clarity.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <h3>Pre / Post Surgical Care</h3>
+      <p>Complete pre-operative evaluation and post-surgery follow-up care to ensure the best outcomes for your eyes.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🤝</div>
+      <h3>Community Eye Care</h3>
+      <p>Outreach programmes and affordable care options to bring quality eye health services to every community.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-tag" style="color:var(--teal)">See Our Space</div>
+  <h2 class="section-title">A Clinic Designed<br>Around You</h2>
+  <p class="section-sub">Modern, welcoming and fully equipped — step inside Digital Bridge Eye Clinic.</p>
+  <div class="gallery-grid">
+    <!-- Large feature image -->
+    <div class="gallery-item">
+      <img src="1002507889.jpg" alt="Customer browsing frames at Digital Bridge Eye Clinic" />
+      <div class="overlay"><span>Our Showroom</span></div>
+    </div>
+    <!-- Top-right photo -->
+    <div class="gallery-item">
+      <img src="1002507888.jpg" alt="Customer selecting eyeglasses" />
+      <div class="overlay"><span>Frames for Every Style</span></div>
+    </div>
+    <!-- Bottom-right video -->
+    <div class="gallery-item">
+      <video autoplay muted loop playsinline>
+        <source src="VID-20260519-WA0097.mp4" type="video/mp4">
+      </video>
+      <div class="overlay"><span>Live at the Clinic</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" style="padding:88px 6%">
+  <div class="why-visual">
+    <img src="1002507892.jpg" alt="Digital Bridge Eye Clinic interior" />
+    <div class="why-badge">
+      <div class="num">8+</div>
+      <div class="label">Years of<br>Excellence</div>
+    </div>
+  </div>
+  <div>
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-title">Your Vision Is Our Priority</h2>
+    <p class="section-sub">We don't just prescribe glasses — we build lasting relationships with our patients, guided by evidence-based care and genuine compassion.</p>
+    <ul class="why-list">
+      <li><div class="check">✓</div><div>State-of-the-art diagnostic equipment for accurate, fast eye assessments every time.</div></li>
+      <li><div class="check">✓</div><div>Experienced, fully licensed optometrists who take time to truly understand your vision needs.</div></li>
+      <li><div class="check">✓</div><div>Nigeria's most stylish frame collection — from budget-friendly to luxury designer brands.</div></li>
+      <li><div class="check">✓</div><div>Affordable pricing with payment flexibility, so quality eye care is never out of reach.</div></li>
+      <li><div class="check">✓</div><div>Conveniently located at Oshodi with walk-in appointments and same-day service available.</div></li>
+    </ul>
+    <a href="#contact" class="btn-primary" style="margin-top:32px;display:inline-block">Schedule Your Visit</a>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section id="hours">
+  <div class="section-tag">Opening Hours</div>
+  <h2 class="section-title">We're Open When You Need Us</h2>
+  <p class="section-sub">Walk in or call ahead — our team is always ready to see you.</p>
+  <div class="hours-cards">
+    <div class="hours-card">
+      <div class="day">Monday – Friday</div>
+      <div class="time">9:00 AM – 5:00 PM</div>
+      <div class="note">Full services available</div>
+    </div>
+    <div class="hours-card">
+      <div class="day">Saturday & Public Holidays</div>
+      <div class="time">9:00 AM – 3:00 PM</div>
+      <div class="note">Walk-ins welcome</div>
+    </div>
+    <div class="hours-card" style="background:var(--purple);border-color:transparent;">
+      <div class="day" style="color:rgba(255,255,255,.6)">Emergency</div>
+      <div class="time" style="color:white;">Call Us Anytime</div>
+      <div class="note" style="color:rgba(255,255,255,.5)">09017722227</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <div class="section-tag" style="color:var(--teal)">Get In Touch</div>
+    <h2 class="section-title">Ready to See the World More Clearly?</h2>
+    <p class="section-sub">Visit us, call us, or drop a message. Our team responds promptly and will get you scheduled as soon as possible.</p>
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <div class="icon-box">📍</div>
+        <div class="text"><label>Location</label><span>1 Nitel Road, Oshodi, Lagos State</span></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon-box">📞</div>
+        <div class="text"><label>Phone</label><span>09017722227 &nbsp;|&nbsp; 08163577033</span></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon-box">✉️</div>
+        <div class="text"><label>Email</label><span>digitalbridgeeyeclinic@gmail.com</span></div>
+      </div>
+      <div class="contact-info-item">
+        <div class="icon-box">📱</div>
+        <div class="text"><label>Social Media</label><span>@digitalbridgeeyeclinic</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <h3>Book an Appointment</h3>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" placeholder="e.g. Emeka Okafor" />
+    </div>
+    <div class="form-group">
+      <label>Phone Number</label>
+      <input type="tel" placeholder="08XXXXXXXXX" />
+    </div>
+    <div class="form-group">
+      <label>Service Needed</label>
+      <select>
+        <option value="">Select a service…</option>
+        <option>Eye Examination</option>
+        <option>Optical Frames</option>
+        <option>Contact Lenses</option>
+        <option>Pre/Post Surgical Care</option>
+        <option>Community Eye Care</option>
+        <option>Other / Not Sure</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Message (Optional)</label>
+      <textarea placeholder="Any additional details about your visit…"></textarea>
+    </div>
+    <button class="form-submit" onclick="alert('Thank you! We will contact you shortly to confirm your appointment.')">Send Appointment Request 🗓️</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Digital Bridge Eye Clinic · 1 Nitel Road, Oshodi, Lagos</span>
+  <div class="social-links">
+    <a href="#" title="Instagram">IG</a>
+    <a href="#" title="Facebook">FB</a>
+    <a href="#" title="TikTok">TK</a>
+    <a href="#" title="WhatsApp">WA</a>
+  </div>
+  <span>Built with ❤️ for better vision</span>
+</footer>
+
+</body>
+</html>
