@@ -85,7 +85,7 @@
   }
   .hero-content {
     position: relative; z-index: 2;
-    max-width: 720px; padding: 0 6%;
+    max-width: 720px; padding: 100px 6% 0;
     animation: fadeUp .9s ease both;
   }
   .hero-badge {
@@ -380,8 +380,8 @@
 <!-- HERO -->
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
-    <source src="VID-20260519-WA0096.mp4" type="video/mp4">
-    <source src="VID-20260519-WA0097.mp4" type="video/mp4">
+    <source src="videos/VID-20260519-WA0096.mp4" type="video/mp4">
+    <source src="videos/VID-20260519-WA0097.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -457,18 +457,18 @@
   <div class="gallery-grid">
     <!-- Large feature image -->
     <div class="gallery-item">
-      <img src="1002507889.jpg" alt="Customer browsing frames at Digital Bridge Eye Clinic" />
+      <img src="images/customer-looking-1.jpg" alt="Customer browsing frames at Digital Bridge Eye Clinic" />
       <div class="overlay"><span>Our Showroom</span></div>
     </div>
     <!-- Top-right photo -->
     <div class="gallery-item">
-      <img src="1002507888.jpg" alt="Customer selecting eyeglasses" />
+      <img src="images/customer-looking-2.jpg" alt="Customer selecting eyeglasses" />
       <div class="overlay"><span>Frames for Every Style</span></div>
     </div>
     <!-- Bottom-right video -->
     <div class="gallery-item">
       <video autoplay muted loop playsinline>
-        <source src="VID-20260519-WA0097.mp4" type="video/mp4">
+        <source src="videos/VID-20260519-WA0097.mp4" type="video/mp4">
       </video>
       <div class="overlay"><span>Live at the Clinic</span></div>
     </div>
@@ -478,7 +478,7 @@
 <!-- WHY US -->
 <section id="why" style="padding:88px 6%">
   <div class="why-visual">
-    <img src="1002507892.jpg" alt="Digital Bridge Eye Clinic interior" />
+    <img src="images/flyer.jpg" alt="Digital Bridge Eye Clinic interior" />
     <div class="why-badge">
       <div class="num">8+</div>
       <div class="label">Years of<br>Excellence</div>
@@ -552,15 +552,15 @@
     <h3>Book an Appointment</h3>
     <div class="form-group">
       <label>Full Name</label>
-      <input type="text" placeholder="e.g. Emeka Okafor" />
+      <input id="fname" type="text" placeholder="e.g. Emeka Okafor" />
     </div>
     <div class="form-group">
       <label>Phone Number</label>
-      <input type="tel" placeholder="08XXXXXXXXX" />
+      <input id="fphone" type="tel" placeholder="08XXXXXXXXX" />
     </div>
     <div class="form-group">
       <label>Service Needed</label>
-      <select>
+      <select id="fservice">
         <option value="">Select a service…</option>
         <option>Eye Examination</option>
         <option>Optical Frames</option>
@@ -572,20 +572,52 @@
     </div>
     <div class="form-group">
       <label>Message (Optional)</label>
-      <textarea placeholder="Any additional details about your visit…"></textarea>
+      <textarea id="fmessage" placeholder="Any additional details about your visit…"></textarea>
     </div>
-    <button class="form-submit" onclick="alert('Thank you! We will contact you shortly to confirm your appointment.')">Send Appointment Request 🗓️</button>
+    <button class="form-submit" onclick="sendToWhatsApp()">Send Appointment Request 🗓️</button>
   </div>
 </section>
+
+<script>
+function sendToWhatsApp() {
+  const name    = document.getElementById('fname').value.trim();
+  const phone   = document.getElementById('fphone').value.trim();
+  const service = document.getElementById('fservice').value;
+  const message = document.getElementById('fmessage').value.trim();
+
+  if (!name || !phone || !service) {
+    alert('Please fill in your Name, Phone Number, and Service before submitting.');
+    return;
+  }
+
+  const text = `Hello Digital Bridge Eye Clinic! 👋\n\nI'd like to book an appointment.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service:* ${service}${message ? '\n*Additional Info:* ' + message : ''}\n\nPlease confirm my appointment. Thank you!`;
+
+  const waNumber = '2349017722227';
+  const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
   <span>© 2026 Digital Bridge Eye Clinic · 1 Nitel Road, Oshodi, Lagos</span>
   <div class="social-links">
-    <a href="#" title="Instagram">IG</a>
-    <a href="#" title="Facebook">FB</a>
-    <a href="#" title="TikTok">TK</a>
-    <a href="#" title="WhatsApp">WA</a>
+    <!-- Instagram -->
+    <a href="https://instagram.com/digitalbridgeeyeclinic" target="_blank" title="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <!-- Facebook -->
+    <a href="https://facebook.com/DigitalBridgeEyeClinic" target="_blank" title="Facebook">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <!-- TikTok -->
+    <a href="https://tiktok.com/@dbridgeeyeclinic" target="_blank" title="TikTok">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+    <!-- WhatsApp -->
+    <a href="https://wa.me/2349017722227" target="_blank" title="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
   </div>
   <span>Built with ❤️ for better vision</span>
 </footer>
